@@ -93,6 +93,12 @@ Projects {data-icon=project-diagram}
 CV %<>% print_section('projects')
 ```
 
+<br>
+<br>
+<br>
+<br>
+<br>
+
 
 Publications {data-icon=copy}
 --------------------------------------------------------------------------------
