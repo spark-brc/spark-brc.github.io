@@ -109,24 +109,24 @@ CV %<>% print_section('publications')
 
 
 
-<!-- Training Manuals {data-icon=file-invoice} -->
-<!-- -------------------------------------------------------------------------------- -->
+Training Manuals {data-icon=file-invoice}
+--------------------------------------------------------------------------------
 
-<!-- ```{r} -->
-<!-- CV %<>% print_section('manuals') -->
-<!-- ``` -->
-
-
-<!-- <br> -->
-<!-- <br> -->
+```{r}
+CV %<>% print_section('manuals')
+```
 
 
-<!-- Conference Proceedings {data-icon=users} -->
-<!-- -------------------------------------------------------------------------------- -->
+<br>
+<br>
 
-<!-- ```{r} -->
-<!-- CV %<>% print_section('conference') -->
-<!-- ``` -->
+
+Conference Proceedings {data-icon=users}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('conference')
+```
 
 
 <!-- Invited Talks {data-icon=chalkboard-teacher} -->
@@ -137,12 +137,12 @@ CV %<>% print_section('publications')
 <!-- ``` -->
 
 
-<!-- Workshops Conducted {data-icon=chalkboard-teacher} -->
-<!-- -------------------------------------------------------------------------------- -->
+Workshops Conducted {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
 
-<!-- ```{r} -->
-<!-- CV %<>% print_section('workshops') -->
-<!-- ``` -->
+```{r}
+CV %<>% print_section('workshops')
+```
 
 
 
@@ -155,12 +155,12 @@ CV %<>% print_section('publications')
 
 
 
-<!-- Software Development {data-icon=magic} -->
-<!-- -------------------------------------------------------------------------------- -->
+Software Development {data-icon=magic}
+--------------------------------------------------------------------------------
 
-<!-- ```{r} -->
-<!-- CV %<>% print_section('software') -->
-<!-- ``` -->
+```{r}
+CV %<>% print_section('software')
+```
 
 
 
