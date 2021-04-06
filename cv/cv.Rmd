@@ -44,14 +44,23 @@ if(params$pdf_mode) {
 
 Main
 ================================================================================
+<span style="font-size:30px; margin-left:30px;margin-top:-30px;">SEONGGYU <strong>PARK</strong></span><br>
+<span style="color:white; font-size:15px; padding-left:30px;">--</span>
+<span style="color:gray; font-size:15px; padding-left:30px;">Assistant Research <strong>Scientist</strong></span>
 
-Seonggyu Park {#title}
+
+{#title}
 --------------------------------------------------------------------------------
 
 ```{r}
 # Note the special double pipe so we modify the CV object in place
 CV %<>% print_text_block("intro") 
 ```
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
