@@ -176,7 +176,7 @@ research %>%
           fa_youtube = ifelse(!is.na(youtube), 
                           paste0('<a href=', 
                                 youtube, 
-                                '><i class="fab fa-youtube"></i></a>'),
+                                '><i class="fas falink fa-youtube"></i></a>'),
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
@@ -257,7 +257,7 @@ research %>%
           fa_youtube = ifelse(!is.na(youtube), 
                           paste0('<a href=', 
                                 youtube, 
-                                '><i class="fab fa-youtube"></i></a>'),
+                                '><i class="fab fafooter fa-youtube"></i></a>'),
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
@@ -297,7 +297,7 @@ research %>%
           fa_youtube = ifelse(!is.na(youtube), 
                           paste0('<a href=', 
                                 youtube, 
-                                '><i class="fab fa-youtube"></i></a>'),
+                                '><i class="fab fafooter fa-youtube"></i></a>'),
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
@@ -331,32 +331,15 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
   if(!is.null(journal)) {
     journal <- paste0("*", journal, "*.")
   }
-  
   if(!is.null(volume)) {
     volume <- paste0("*", volume, "*,")
   }
-  
   if(!is.null(issue)) {
     volume <- paste0(gsub(",", "", volume), " (", issue,"),")
   }
   if(!is.null(doi) & !is.null(url)) {
-    # doi <- paste0("&emsp;&nbsp;<i class='ai fab ai-doi ai-lg'></i>", "[:", doi, "](", url, ")")
-    # doi <- paste0('<a href=', url, '><i class="ai ai-doi ai-lg"></i></a>', "[:", doi, "](", url, ")")
     doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
   }
-
-# <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')'
-#   '<a href=', url, '><i class="ai ai-doi ai-lg"></i></a>', "[:", doi, "](", url, ")")
-
-#   paste0('[<i class="fab falink2 fa-github"></i>](', 
-#          submitted$git_repo, 
-#          ")"
-#          ),
-#   ""
-#   )
-
-
-
 
   if(!is.null(pages)) {
     if(!is.null(book)) {
@@ -557,14 +540,15 @@ submitted <- pubs %>%
 fa_web = ifelse(
   !is.na(submitted$url), 
   paste0(
-    '[<i class="fas falink2 fa-globe"></i>](',
+    '[<i class="fas falink fa-globe"></i>](',
     submitted$url,
     ")"),
     "")
 
+# falink makes gray
 fa_doc <- ifelse(
   !is.na(submitted$full_paper_link), 
-  paste0('[<i class="fas falink2 fa-file-alt"></i>](', 
+  paste0('[<i class="fas falink fa-file-alt"></i>](', 
          submitted$full_paper_link, 
          ")"
          ),
@@ -573,7 +557,7 @@ fa_doc <- ifelse(
 
 fa_git <- ifelse(
   !is.na(submitted$git_repo), 
-  paste0('[<i class="fab falink2 fa-github"></i>](', 
+  paste0('[<i class="fab fafooter fa-github"></i>](', 
          submitted$git_repo, 
          ")"
          ),
