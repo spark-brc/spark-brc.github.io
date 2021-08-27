@@ -371,7 +371,7 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
                             ", ", 
                             "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",                             
                             # "<span style='color:#a3c3d9;margin-left:1.5em;margin-right:-0.5em'><i class='fas fa-map-marker-alt'></i></span>", 
-                            
+                            " ",
                             conf_loc,
                             ".") 
       }
@@ -379,7 +379,9 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
         conference <- paste0("Poster presented at the ", 
                              conference, 
                             ", ", 
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",                             conf_loc,
+                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
+                            conf_loc,
+                            " ",
                             ".") 
       }
     }
@@ -388,21 +390,19 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
           conference <- paste0("at the annual meeting of the ", 
                             conference, 
                             ", ", 
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",                             conf_loc,
+                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
+                            " ",
+                            conf_loc,
                             ".") 
       }
-      # else {
-      #   conference <- paste0("Paper presented at the ", 
-      #                        conference, 
-      #                        ",", 
-      #                        conf_loc,
-      #                       ".") 
-      # }
       else {
-        conference <- paste0("at the ", 
-                             conference,
-                             ", ",
-                             "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",                              conf_loc,
+        conference <- paste0(
+                            "at the ", 
+                            conference,
+                            ", ",
+                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
+                            " ",
+                            conf_loc,
                             ".") 
       }
     }
