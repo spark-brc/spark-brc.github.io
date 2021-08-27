@@ -60,8 +60,8 @@ h2.date {
 .location {
     color: #a3c4da;
     text-align: right;
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 1px;
+    padding-right: 10px;
   }
 
 
