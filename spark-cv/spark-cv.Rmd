@@ -40,7 +40,7 @@ PDF <- TRUE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
 if(PDF) {
   header <- '
   View online
-  <a href="https://datalorax.github.io/anderson-cv/" class="icon-block">
+  <a href="https://spark-brc.github.io/spark-cv/" class="icon-block">
       <i class="fas fafooter fa-globe"></i>
   </a>
   '
@@ -188,7 +188,7 @@ research %>%
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
-                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
+                          "<span class='background'>",
                           tool,
                           "</span>"
                           ),
@@ -229,7 +229,7 @@ research %>%
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
-                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
+                          "<span class='background'>",
                           tool,
                           "</span>"
                           ),
@@ -269,7 +269,7 @@ research %>%
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
-                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
+                          "<span class='background'>",
                           tool,
                           "</span>"
                           ),
@@ -309,7 +309,8 @@ research %>%
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
-                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
+                          # "<span style='background-color:#a3c4da; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>"
+                          "<span class='background'>",
                           tool,
                           "</span>"
                           ),
@@ -347,6 +348,7 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
   }
   if(!is.null(doi) & !is.null(url)) {
     doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
+    # doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
   }
 
   if(!is.null(pages)) {
@@ -662,53 +664,6 @@ kable(conf_tbl[11:19, ])
 </div>
 <br class="pageBreak">
 
-# Teaching
-
-<div class = "inote">
-Icons link to additional content  
-</div>
-
-## Related experience{.nohead .tch}
-
-```{r}
-research %>% 
-  filter(type == "teaching") %>% 
-  arrange(order) %>% 
-  mutate(fa_web = ifelse(!is.na(website), 
-                          paste0( '<a href=', 
-                                  website, 
-                                  '><i class="fas falink fa-globe"></i></a>'),
-                          ""),
-          fa_git = ifelse(!is.na(repo), 
-                          paste0('<a href=', 
-                                repo, 
-                                '><i class="fab falink fa-github"></i></a>'),
-                          ""),
-          fa_youtube = ifelse(!is.na(youtube), 
-                          paste0('<a href=', 
-                                youtube, 
-                                '><i class="fab fa-youtube"></i></a>'),
-                          ""),
-          tool = ifelse(!is.na(tool),
-                        paste0(
-                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
-                          tool,
-                          "</span>"
-                          ),
-                          ""),
-          year = str_c(year_begin, 
-                      " --- ", 
-                      ifelse(is.na(year_end), "current", year_end)),
-          what = paste0(what, ". ", "(",  year, "). ", tool, 
-                          fa_git, fa_web, fa_youtube),
-          what = gsub("NA, ", "", what),
-          order = paste0(order, ".")
-          ) %>% 
-  select(point, what) %>% 
-  kable()
-```
-
-<br class="pageBreak"/>
 
 <!-- # External Funding Activity -->
 
@@ -852,9 +807,6 @@ research %>%
 
 
 # Professional Service 
-
-
-
 ## Workshops delivered{.nohead .submitted}
 
 <div class = "hangingindent">
@@ -864,78 +816,74 @@ workshops <- cv_entries %>%
   filter(type == "workshop-delivered")
 
 workshops %>%
-  mutate(count = paste0(seq(nrow(.), 1), "."),
-         cite = paste0(paste0("*", what, "*"),
-                       ". (", 
-                       year_end, 
-                       "). ",
-                       where, 
-                       ".")) %>%
+  mutate(
+    loc = ifelse(!is.na(loc),
+                paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
+                ""),
+    pps = ifelse(!is.na(participants),
+                paste0("<i class='fas location fa-users'></i>", " number of attendees: ", participants),
+                ""),
+
+    count = paste0(seq(nrow(.), 1), "."),
+          cite = paste0(paste0(what, ", ", pps), 
+                        ", (", 
+                        year_end, 
+                        "). ",
+                        paste0("*", where, "*"), ",", loc, ".")) %>%
   select(count, cite) %>%
   kable()
 ```
 
 </div>
 
-
-## Peer review service {.nohead}
-
-I serve on the editorial review board for [Reading Research Quarterly](https://ila.onlinelibrary.wiley.com/journal/19362722) and have served as an ad hoc reviewer for the following journals:
-
-<div class = "adhoc">
+## Invited talks{.nohead .submitted}
+<div class = "hangingindent">
 
 ```{r}
-reviewer <- cv_entries %>%
-  filter(type == "peer-reviewer") %>%
-  select(what) %>%
-  mutate(index = c(rep(1, floor(nrow(.)/2)), 
-                   rep(2, nrow(.) - floor(nrow(.)/2))
-                   ))
+talks <- cv_entries %>%
+  filter(type == "invited-talks")
 
-
-jou1 <- reviewer$what[reviewer$index == 1]
-jou2 <- reviewer$what[reviewer$index == 2]
-
-if(length(jou1) < length(jou2)) {
-  jou1 <- c(jou1, NA)
-}
-if(length(jou2) < length(jou1)) {
-  jou2 <- c(jou2, NA)
-}
-
-data.frame(jou1, jou2) %>%
+talks %>%
+  mutate(
+    loc = ifelse(!is.na(loc),
+                paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
+                ""),    
+    
+    count = paste0(seq(nrow(.), 1), "."),
+          cite = paste0(paste0(what),
+                        ", (", 
+                        year_end, 
+                        "). ",
+                        paste0("*", where, "*"), ",", loc, ".")) %>%
+  select(count, cite) %>%
   kable()
 ```
-
 </div>
 
-In addition to these journals, I have served as a reviewer for the annual conferences for the [American Educational Research Association](https://www.aera.net) and the [Council for Exceptional Children](https://exceptionalchildren.org).
+<br>
 
-<!-- <br class="pageBreak"> -->
+# Fellowships & Awards {.submitted .nohead}
 
-# Awards {.submitted .nohead}
-
-<div class="hangingindent">
+<div class = "hangingindent">
 
 ```{r}
 cv_entries %>%
   filter(type == "award") %>%
   mutate(count = paste0(seq(nrow(.), 1), "."),
-         cite = paste0(what, ". (", year_end, "). ", 
-                       ifelse(!is.na(additional_info), 
-                              paste0(additional_info, "."),
-                              "")
-                       )
+         cite = paste0(what, ", ", where,  ", ", (ifelse(!is.na(additional_info), 
+                              paste0("$", additional_info, ","),
+                              "")), " (", year_end, "). ")
         ) %>%
   select(count, cite) %>%
   kable()
 ```
-
 </div>
+
+<br>
 
 # Professional Affiliations {.nohead .submitted}
 
-<div class="hangingindent prof">
+<div class="hangingindent">
 
 ```{r}
 cv_entries %>%
@@ -944,5 +892,53 @@ cv_entries %>%
   select(count, what) %>%
   kable()
 ```
-
 </div>
+
+
+<br class="pageBreak">
+
+# Teaching
+
+<div class = "inote">
+Icons link to additional content  
+</div>
+
+## Related experience{.nohead .tch}
+
+```{r}
+research %>% 
+  filter(type == "teaching") %>% 
+  arrange(order) %>% 
+  mutate(fa_web = ifelse(!is.na(website), 
+                          paste0( '<a href=', 
+                                  website, 
+                                  '><i class="fas falink fa-globe"></i></a>'),
+                          ""),
+          fa_git = ifelse(!is.na(repo), 
+                          paste0('<a href=', 
+                                repo, 
+                                '><i class="fab falink fa-github"></i></a>'),
+                          ""),
+          fa_youtube = ifelse(!is.na(youtube), 
+                          paste0('<a href=', 
+                                youtube, 
+                                '><i class="fab fa-youtube"></i></a>'),
+                          ""),
+          tool = ifelse(!is.na(tool),
+                        paste0(
+                          "<span class='background'>",
+                          tool,
+                          "</span>"
+                          ),
+                          ""),
+          year = str_c(year_begin, 
+                      " --- ", 
+                      ifelse(is.na(year_end), "current", year_end)),
+          what = paste0(what, ". ", "(",  year, "). ", tool, 
+                          fa_git, fa_web, fa_youtube),
+          what = gsub("NA, ", "", what),
+          order = paste0(order, ".")
+          ) %>% 
+  select(point, what) %>% 
+  kable()
+```

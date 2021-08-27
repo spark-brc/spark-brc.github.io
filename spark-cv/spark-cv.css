@@ -56,6 +56,14 @@ h2.date {
   padding-right: 5px;
 }
 
+.background {
+    font-size: 0.9em;
+    background-color:#c2c4c7;
+    color:white;
+    border-radius:4px;
+    padding-right:2px;
+    padding-left:2px;    
+}
 
 .location {
     color: #a3c4da;
@@ -63,8 +71,6 @@ h2.date {
     padding-left: 2px;
     padding-right: 2px;
   }
-
-
 
 .fafooter:hover {
   color: #FF95FD;
