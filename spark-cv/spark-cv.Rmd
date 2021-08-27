@@ -341,8 +341,23 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
   }
   if(!is.null(doi) & !is.null(url)) {
     # doi <- paste0("&emsp;&nbsp;<i class='ai fab ai-doi ai-lg'></i>", "[:", doi, "](", url, ")")
-    doi <- paste0('<a href=', url, '><i class="ai ai-doi ai-lg"></i></a>', "[:", doi, "](", url, ")")
+    # doi <- paste0('<a href=', url, '><i class="ai ai-doi ai-lg"></i></a>', "[:", doi, "](", url, ")")
+    doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
   }
+
+# <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')'
+#   '<a href=', url, '><i class="ai ai-doi ai-lg"></i></a>', "[:", doi, "](", url, ")")
+
+#   paste0('[<i class="fab falink2 fa-github"></i>](', 
+#          submitted$git_repo, 
+#          ")"
+#          ),
+#   ""
+#   )
+
+
+
+
   if(!is.null(pages)) {
     if(!is.null(book)) {
       pages <- paste0("(pp. ", pages, ").")
@@ -530,6 +545,57 @@ if(length(formatted_cites) > 0) {
 
 </div>
 
+## Training Manuals {.submitted .nohead}
+
+<div class = "hangingindent">
+
+```{r }
+submitted <- pubs %>% 
+  filter(type == "manual") %>% 
+  select(-type)
+
+fa_web = ifelse(
+  !is.na(submitted$url), 
+  paste0(
+    '[<i class="fas falink2 fa-globe"></i>](',
+    submitted$url,
+    ")"),
+    "")
+
+fa_doc <- ifelse(
+  !is.na(submitted$full_paper_link), 
+  paste0('[<i class="fas falink2 fa-file-alt"></i>](', 
+         submitted$full_paper_link, 
+         ")"
+         ),
+  ""
+  )
+
+fa_git <- ifelse(
+  !is.na(submitted$git_repo), 
+  paste0('[<i class="fab falink2 fa-github"></i>](', 
+         submitted$git_repo, 
+         ")"
+         ),
+  ""
+  )
+
+each_cite <- split(submitted, seq_len(nrow(submitted)))
+empties <- map(each_cite, ~map_lgl(.x, is.na))
+
+cites <- map2(each_cite, empties, ~.x[ ,!.y])
+formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
+
+if(length(formatted_cites) > 0) {
+ submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
+                         cites = paste(unlist(formatted_cites), fa_web, fa_doc, fa_git)) 
+  
+  kable(submitted_tbl) 
+}
+```
+
+</div>
+
 
 <br class="pageBreak"/>
 
@@ -598,7 +664,6 @@ kable(conf_tbl[1:10, ])
 
 </div>
 
-
 <br class="pageBreak">
 
 <div class = "hangingindent prpa nohead">
@@ -608,27 +673,7 @@ kable(conf_tbl[11:19, ])
 ```
 
 </div>
-
-
 <br class="pageBreak">
-
-<div class = "hangingindent prpa nohead">
-
-```{r}
-kable(conf_tbl[19:28, ])
-```
-
-</div>
-
-<br class="pageBreak">
-
-<div class = "hangingindent prpa nohead">
-
-```{r}
-kable(conf_tbl[29:nrow(conf_tbl), ])
-```
-
-</div>
 
 # Teaching
 
