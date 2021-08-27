@@ -36,7 +36,7 @@ courses <- readxl::read_xlsx(here::here("data", "courses.xlsx"))
 
 
 ```{r}
-PDF <- FALSE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
+PDF <- TRUE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
 if(PDF) {
   header <- '
   View online
@@ -118,13 +118,17 @@ Curriculum Vita
 ## Education {.education .nohead}
 ```{r}
 cv_entries %>% 
-  filter(type == 'education') %>% 
-  mutate(what = paste0(what, ", ", where),
-         what = gsub("NA", "", what),
-         what = gsub(", $", "", what),
-         what = ifelse(!is.na(url), 
-                       paste0("[", what, "](", url, ")"), 
-                       what)
+  filter(type == 'education') %>%
+  mutate(
+    loc = ifelse(!is.na(loc),
+                paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
+                ""),
+    what = paste0(what, ", ", where, ", ", loc),
+    what = gsub("NA", "", what),
+    what = gsub(", $", "", what),
+    what = ifelse(!is.na(url), 
+                paste0("[", what, "](", url, ")"), 
+                what)
          ) %>% 
   mutate(year = str_c(year_begin, " --- ", year_end)) %>% 
   select(year, what) %>% 
@@ -137,10 +141,14 @@ cv_entries %>%
 ```{r}
 cv_entries %>% 
   filter(type == 'history') %>% 
-  mutate(what = paste0("<span style= 'font-weight: 500'>",
+  mutate(
+    loc = ifelse(!is.na(loc),
+                paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
+                ""),    
+    what = paste0("<span style= 'font-weight: 500'>",
                        what, 
                        "</span>"),
-    what = paste0(what, ", ", where),
+    what = paste0(what, ", ", where, ", ", loc),
          what = gsub("NA", "", what),
          what = gsub(", $", "", what)) %>% 
   mutate(year = str_c(year_begin, 
