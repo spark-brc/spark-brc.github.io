@@ -171,7 +171,7 @@ research %>%
           fa_git = ifelse(!is.na(repo), 
                           paste0('<a href=', 
                                 repo, 
-                                '><i class="fab fafooter fa-github"></i></a>'),
+                                '><i class="fab falink fa-github"></i></a>'),
                           ""),
           fa_youtube = ifelse(!is.na(youtube), 
                           paste0('<a href=', 
@@ -212,7 +212,7 @@ research %>%
           fa_git = ifelse(!is.na(repo), 
                           paste0('<a href=', 
                                 repo, 
-                                '><i class="fab fafooter fa-github"></i></a>'),
+                                '><i class="fab falink fa-github"></i></a>'),
                           ""),
           fa_youtube = ifelse(!is.na(youtube), 
                           paste0('<a href=', 
@@ -366,20 +366,18 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
       if(annual_meeting) {
        conference <- paste0("Poster presented at the annual meeting of the ", 
                             conference,
-                            ", ", 
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",                             
+                            ",", 
+                            "<i class='fas location fa-map-marker-alt'></i>",                             
                             # "<span style='color:#a3c3d9;margin-left:1.5em;margin-right:-0.5em'><i class='fas fa-map-marker-alt'></i></span>", 
-                            " ",
                             conf_loc,
                             ".") 
       }
       else {
         conference <- paste0("Poster presented at the ", 
                              conference, 
-                            ", ", 
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
+                            ",", 
+                            "<i class='fas location fa-map-marker-alt'></i>",
                             conf_loc,
-                            " ",
                             ".") 
       }
     }
@@ -388,8 +386,7 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
           conference <- paste0("at the annual meeting of the ", 
                             conference, 
                             ", ", 
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
-                            " ",
+                            "<i class='fas location fa-map-marker-alt'></i>",
                             conf_loc,
                             ".") 
       }
@@ -397,9 +394,8 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
         conference <- paste0(
                             "at the ", 
                             conference,
-                            ", ",
-                            "<span style='color:#a3c3d9'><i class='fas fa-map-marker-alt'></i></span>",
-                            " ",
+                            ",",
+                            "<i class='fas location fa-map-marker-alt'></i>",
                             conf_loc,
                             ".") 
       }
@@ -557,7 +553,7 @@ fa_doc <- ifelse(
 
 fa_git <- ifelse(
   !is.na(submitted$git_repo), 
-  paste0('[<i class="fab fafooter fa-github"></i>](', 
+  paste0('[<i class="fab falink fa-github"></i>](', 
          submitted$git_repo, 
          ")"
          ),
@@ -619,7 +615,6 @@ fa_pres <- ifelse(
   ""
   )
 
-
 each_cite <- split(confs, seq_len(nrow(confs)))
 empties <- map(each_cite, ~map_lgl(.x, is.na))
 
@@ -665,431 +660,192 @@ kable(conf_tbl[11:19, ])
 Icons link to additional content  
 </div>
 
-## Data science specialization {.nohead .tch}
-I have led the design, development, and teaching of a new [five-course graduate-level data science specialization](https://github.com/uo-datasci-specialization) offered through the University of Oregon's College of Education. The following lists the sequence of courses in the specialization, as well as the year/quarter in which I have taught the courses.
+## Related experience{.nohead .tch}
 
 ```{r}
-courses %>% 
-  filter(type == "ds") %>% 
+research %>% 
+  filter(type == "teaching") %>% 
   arrange(order) %>% 
   mutate(fa_web = ifelse(!is.na(website), 
-                         paste0( '<a href=', 
-                                 website, 
-                                 '><i class="fas falink fa-globe"></i></a>'),
-                         ""),
-         fa_git = ifelse(!is.na(repo), 
-                         paste0('<a href=', 
+                          paste0( '<a href=', 
+                                  website, 
+                                  '><i class="fas falink fa-globe"></i></a>'),
+                          ""),
+          fa_git = ifelse(!is.na(repo), 
+                          paste0('<a href=', 
                                 repo, 
                                 '><i class="fab falink fa-github"></i></a>'),
-                         ""),
-         course = paste0("*", title, "*. (", quarter, ", ",  year, "). ", 
-                         ifelse(!is.na(crn), paste0("CRN: ", crn, "; "), ""), 
-                         credits, " credit hours.",
-                         fa_git, fa_web),
-         order = paste0(order, ".")) %>% 
-  select(order, course) %>% 
+                          ""),
+          fa_youtube = ifelse(!is.na(youtube), 
+                          paste0('<a href=', 
+                                youtube, 
+                                '><i class="fab fa-youtube"></i></a>'),
+                          ""),
+          tool = ifelse(!is.na(tool),
+                        paste0(
+                          "<span style='background-color:#b6d2db; color:white;border-radius:4px; padding-right:2px;padding-left:2px;'>",
+                          tool,
+                          "</span>"
+                          ),
+                          ""),
+          year = str_c(year_begin, 
+                      " --- ", 
+                      ifelse(is.na(year_end), "current", year_end)),
+          what = paste0(what, ". ", "(",  year, "). ", tool, 
+                          fa_git, fa_web, fa_youtube),
+          what = gsub("NA, ", "", what),
+          order = paste0(order, ".")
+          ) %>% 
+  select(point, what) %>% 
   kable()
 ```
-
 
 <br class="pageBreak"/>
 
-# Scholarship
-
-<div class = "inote">
-Icons link to additional content  
-</div>
-
-## Technical reports (selected) {.submitted .nohead}
-I am a co-author on over [sixty](https://www.brtprojects.org/publications/technical-reports/) technical reports. Below is a sample of 10 that are among the most cited.
-
-<div class = "hangingindent">
-
-```{r}
-trs <- pubs %>% 
-  filter(type == "tr") %>% 
-  mutate(title = paste0("*", title),
-         title = gsub("\\s\\(Tech", "\\* \\(Tech", title),
-         place_published = paste0(place_published, ".")) %>% 
-  select(-type)
-
-
-
-fa_doc <- ifelse(
-  !is.na(trs$full_paper_link), 
-  paste0('[<i class="fas falink2 fa-file-alt"></i>](', 
-         trs$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
-
-fa_git <- ifelse(
-  !is.na(trs$git_repo), 
-  paste0('[<i class="fab falink2 fa-github"></i>](', 
-         trs$git_repo, 
-         ")"
-         ),
-  ""
-  )
-
-each_cite <- split(trs, seq_len(nrow(trs)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
-
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
-
-submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                        cites = paste(unlist(formatted_cites), fa_doc, fa_git)) 
-  
-kable(submitted_tbl[1:3, ])
-```
-
-</div>
-
-
-<div class = "hangingindent submitted nohead">
-
-```{r}
-kable(submitted_tbl[4:10, ])
-```
-
-</div>
-
-# External Funding Activity
-
-<div class = "inote">
-Icons link to additional content  
-</div>
-
-```{r}
-grants <- readxl::read_xlsx(here::here("data", "grants.xlsx"))
-
-make_grant_cite <- function(title, funding_agency, award_num, role, pi,
-  date_start, date_end, budget, fte_low_range, fte_high_range, contract,
-  link, in_review = FALSE, ...) {
-  
-  if(in_review) {
-    budg <- paste0(". Proposed budget: $", 
-                   prettyNum(budget, big.mark = ",")
-                   )
-  } else {
-    budg <- paste0(". Total budget: $", 
-                    prettyNum(budget, big.mark = ",")
-                    )
-  }
-  funder <- paste0("*", funding_agency, "* ")
-  if(!is.na(award_num)) {
-    funder <- paste0(funder, " (Award #", award_num, ")")
-  }
-  if(fte_low_range != fte_high_range) {
-    fte <- paste0("FTE: ", 
-                  format(fte_low_range, nsmall = 2), 
-                  " to ", 
-                  format(fte_high_range, nsmall = 2),
-                  " across project years.")
-  }
-  else {
-    fte <- paste0("FTE: ", format(fte_low_range, nsmall = 2), ".")
-  }
-
-  cite <- paste0(paste0(title, ". "),
-                 paste(month(date_start, label = TRUE, abbr = FALSE), 
-                       year(date_start), 
-                       "to",
-                       month(date_end, label = TRUE, abbr = FALSE), 
-                       year(date_end)),
-                 ". ", funder, 
-                 budg,
-                 paste0(". ", 
-                        "<span style= 'font-weight: 500'> Role: </span>", 
-                        role, 
-                        ". ")
-                )
-  cite <- ifelse(!is.na(pi), 
-                 paste0(cite, " PI: ", pi, "."),
-                 cite)
-  icon <- ifelse(!is.na(link), 
-                 paste('<a href=', 
-                       link, 
-                       '><i class="fas falink2 fa-globe"></i></a>'),
-                 "")
-  paste(cite, fte, icon)
-}
-```
-
-## Under review {.nohead .submitted}
-
-<div class = "hangingindent">
-
-```{r}
-grants_submitted <- grants %>%
-  filter(type == "in-review") %>%
-  group_by(count = paste0(seq(1, nrow(.)), ".")) %>%
-  nest() %>%
-  mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>%
-  select(-data) %>%
-  unnest(cite) 
-
-kable(grants_submitted[1:2, ])
-```
-
-</div>
-
-<br class = "pageBreak"/>
-
-## Current projects {.nohead .submitted}
-
-<div class = "hangingindent">
-
-```{r}
-grants %>%
-  filter(type == "current") %>%
-  group_by(count = paste0(seq(1, nrow(.)), ".")) %>%
-  nest() %>%
-  mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>%
-  select(-data) %>%
-  unnest(cite) %>%
-  kable()
-```
-
-</div>
-
-
-## Completed projects {.nohead .submitted}
-
-<div class = "hangingindent">
-
-```{r}
-grants %>%
-  filter(type == "completed") %>%
-  group_by(count = paste0(seq(1, nrow(.)), ".")) %>%
-  nest() %>%
-  mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>%
-  select(-data) %>%
-  unnest(cite) %>%
-  kable()
-```
-
-</div>
-
-<br class = "pageBreak"/>
-
-## Submitted (unfunded) {.nohead .submitted}
-
-Only applications submitted as Principal Investigator to national agencies are displayed.
-
-
-```{r}
-rejected <- grants %>%
-  filter(type == "rejected") %>%
-  group_by(count = paste0(seq(1, nrow(.)), ".")) %>%
-  nest() %>%
-  mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>%
-  select(-data) %>%
-  unnest(cite)
-```
-
-<div class = "hangingindent">
-```{r }
-kable(rejected)
-```
-</div>
-
-# Software development
-
-<div class = "inote">
-Icons link to additional content  
-</div>
-
-I am active in the R community and have developed a number of packages. My GitHub repositories for R rank in the [top 30 (of 8,590) nationally and top 100 (of 72,387) worldwide](http://git-awards.com/users/datalorax). Below is a summary of packages I have authored and contributed to, as well as a few interactive data applications.
-
-## Author {.nohead .submitted}
-
-```{r }
-pkg_aut <- pubs %>% 
-  filter(type == "software-aut") %>% 
-  select(-type) 
-
-each_cite <- split(pkg_aut, seq_len(nrow(pkg_aut)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
-
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
-
-fa_git <- ifelse(
-  !is.na(pkg_aut$git_repo), 
-  paste0('[<i class = "fab falink2 fa-github"></i>](', 
-         pkg_aut$git_repo, 
-         ")"
-         ),
-  ""
-  )
-
-fa_globe <- ifelse(
-  !is.na(pkg_aut$full_paper_link), 
-  paste0('[<i class = "fas falink2 fa-globe"></i>](', 
-         pkg_aut$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
-
-pkg_aut_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                      cites = paste(unlist(formatted_cites), fa_git, fa_globe)) 
-
-```
-
-
-<div class = "hangingindent submitted nohead">
-
-```{r software2}
-kable(pkg_aut_tbl)
-```
-
-</div>
-
-
-## Contributor {.nohead .submitted}
-
-<div class = "hangingindent">
-
-```{r }
-pkg_ctb <- pubs %>% 
-  filter(type == "software-ctb") %>% 
-  select(-type) 
-
-each_cite <- split(pkg_ctb, seq_len(nrow(pkg_ctb)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
-
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
-
-fa_git <- ifelse(
-  !is.na(pkg_ctb$git_repo), 
-  paste0('[<i class = "fab falink2 fa-github"></i>](', 
-         pkg_ctb$git_repo, 
-         ")"
-         ),
-  ""
-  )
-
-fa_globe <- ifelse(
-  !is.na(pkg_ctb$full_paper_link), 
-  paste0('[<i class = "fas falink2 fa-globe"></i>](', 
-         pkg_ctb$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
-
-pkg_ctb_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                      cites = paste(unlist(formatted_cites), fa_git, fa_globe)) 
-  
-kable(pkg_ctb_tbl)  
-```
-
-</div>
-
-<br class="pageBreak">
-
-## Web applications {.nohead .submitted}
-In addition to the below, I have also developed interactive web applications and websites for non-profit and statewide agencies, which are generally password protected (and not directly shareable).
-
-<div class="hangingindent web-apps">
-
-```{r}
-web_app <- pubs %>% 
-  filter(type == "web-app") %>% 
-  select(-type) 
-
-each_cite <- split(web_app, seq_len(nrow(web_app)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
-
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
-
-fa_git <- ifelse(
-  !is.na(web_app$git_repo), 
-  paste0('[<i class = "fab falink2 fa-github"></i>](', 
-         web_app$git_repo, 
-         ")"
-         ),
-  ""
-  )
-
-fa_globe <- ifelse(
-  !is.na(web_app$full_paper_link), 
-  paste0('[<i class = "fas falink2 fa-globe"></i>](', 
-         web_app$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
-
-web_app_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                      cites = paste(unlist(formatted_cites), fa_git, fa_globe)) 
-  
-kable(web_app_tbl)
-
-```
-
-</div>
+<!-- # External Funding Activity -->
+
+<!-- <div class = "inote"> -->
+<!-- Icons link to additional content   -->
+<!-- </div> -->
+
+<!-- ```{r} -->
+<!-- grants <- readxl::read_xlsx(here::here("data", "grants.xlsx")) -->
+
+<!-- make_grant_cite <- function(title, funding_agency, award_num, role, pi, -->
+<!--   date_start, date_end, budget, fte_low_range, fte_high_range, contract, -->
+<!--   link, in_review = FALSE, ...) { -->
+
+<!--   if(in_review) { -->
+<!--     budg <- paste0(". Proposed budget: $",  -->
+<!--                    prettyNum(budget, big.mark = ",") -->
+<!--                    ) -->
+<!--   } else { -->
+<!--     budg <- paste0(". Total budget: $",  -->
+<!--                     prettyNum(budget, big.mark = ",") -->
+<!--                     ) -->
+<!--   } -->
+<!--   funder <- paste0("*", funding_agency, "* ") -->
+<!--   if(!is.na(award_num)) { -->
+<!--     funder <- paste0(funder, " (Award #", award_num, ")") -->
+<!--   } -->
+<!--   if(fte_low_range != fte_high_range) { -->
+<!--     fte <- paste0("FTE: ",  -->
+<!--                   format(fte_low_range, nsmall = 2),  -->
+<!--                   " to ",  -->
+<!--                   format(fte_high_range, nsmall = 2), -->
+<!--                   " across project years.") -->
+<!--   } -->
+<!--   else { -->
+<!--     fte <- paste0("FTE: ", format(fte_low_range, nsmall = 2), ".") -->
+<!--   } -->
+
+<!--   cite <- paste0(paste0(title, ". "), -->
+<!--                  paste(month(date_start, label = TRUE, abbr = FALSE),  -->
+<!--                        year(date_start),  -->
+<!--                        "to", -->
+<!--                        month(date_end, label = TRUE, abbr = FALSE),  -->
+<!--                        year(date_end)), -->
+<!--                  ". ", funder,  -->
+<!--                  budg, -->
+<!--                  paste0(". ",  -->
+<!--                         "<span style= 'font-weight: 500'> Role: </span>",  -->
+<!--                         role,  -->
+<!--                         ". ") -->
+<!--                 ) -->
+<!--   cite <- ifelse(!is.na(pi),  -->
+<!--                  paste0(cite, " PI: ", pi, "."), -->
+<!--                  cite) -->
+<!--   icon <- ifelse(!is.na(link),  -->
+<!--                  paste('<a href=',  -->
+<!--                        link,  -->
+<!--                        '><i class="fas falink2 fa-globe"></i></a>'), -->
+<!--                  "") -->
+<!--   paste(cite, fte, icon) -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- ## Under review {.nohead .submitted} -->
+
+<!-- <div class = "hangingindent"> -->
+
+<!-- ```{r} -->
+<!-- grants_submitted <- grants %>% -->
+<!--   filter(type == "in-review") %>% -->
+<!--   group_by(count = paste0(seq(1, nrow(.)), ".")) %>% -->
+<!--   nest() %>% -->
+<!--   mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>% -->
+<!--   select(-data) %>% -->
+<!--   unnest(cite)  -->
+
+<!-- kable(grants_submitted[1:2, ]) -->
+<!-- ``` -->
+
+<!-- </div> -->
+
+<!-- <br class = "pageBreak"/> -->
+
+<!-- ## Current projects {.nohead .submitted} -->
+
+<!-- <div class = "hangingindent"> -->
+
+<!-- ```{r} -->
+<!-- grants %>% -->
+<!--   filter(type == "current") %>% -->
+<!--   group_by(count = paste0(seq(1, nrow(.)), ".")) %>% -->
+<!--   nest() %>% -->
+<!--   mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>% -->
+<!--   select(-data) %>% -->
+<!--   unnest(cite) %>% -->
+<!--   kable() -->
+<!-- ``` -->
+
+<!-- </div> -->
+
+
+<!-- ## Completed projects {.nohead .submitted} -->
+
+<!-- <div class = "hangingindent"> -->
+
+<!-- ```{r} -->
+<!-- grants %>% -->
+<!--   filter(type == "completed") %>% -->
+<!--   group_by(count = paste0(seq(1, nrow(.)), ".")) %>% -->
+<!--   nest() %>% -->
+<!--   mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>% -->
+<!--   select(-data) %>% -->
+<!--   unnest(cite) %>% -->
+<!--   kable() -->
+<!-- ``` -->
+
+<!-- </div> -->
+
+<!-- <br class = "pageBreak"/> -->
+
+<!-- ## Submitted (unfunded) {.nohead .submitted} -->
+
+<!-- Only applications submitted as Principal Investigator to national agencies are displayed. -->
+
+
+<!-- ```{r} -->
+<!-- rejected <- grants %>% -->
+<!--   filter(type == "rejected") %>% -->
+<!--   group_by(count = paste0(seq(1, nrow(.)), ".")) %>% -->
+<!--   nest() %>% -->
+<!--   mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>% -->
+<!--   select(-data) %>% -->
+<!--   unnest(cite) -->
+<!-- ``` -->
+
+<!-- <div class = "hangingindent"> -->
+<!-- ```{r } -->
+<!-- kable(rejected) -->
+<!-- ``` -->
+<!-- </div> -->
 
 
 # Professional Service 
 
-## Working Committees {.nohead .submitted}
 
-<div class = "hangingindent">
-
-```{r}
-committees <- cv_entries %>%
-  filter(type == "service")
-
-committees %>%
-  mutate(count = paste0(seq(nrow(.), 1), "."),
-         cite = paste0(paste0("*", what, "*"),
-                       ". (", 
-                       ifelse(!is.na(year_begin), 
-                              paste0(year_begin, "-"), 
-                              ""), 
-                       year_end, 
-                       "). ",
-                       where, 
-                       ".")) %>%
-  select(count, cite) %>%
-  kable()
-```
-
-</div>
-
-## Doctoral committees {.nohead .submitted}
-
-I have served on the following doctoral committee.
-
-<div class = "hangingindent" style = "margin-top: -15px;">
-
-```{r}
-doc_stu <- cv_entries %>%
-  filter(type == "doc-committee")
-
-doc_stu %>%
-  mutate(count = paste0(seq(nrow(.), 1), "."),
-         cite = paste0(what, ". (", year_begin, "-", year_end, 
-                       "). Dissertation title: *", additional_info, "*. ", 
-                       where, ".")) %>%
-  select(count, cite) %>%
-  kable()
-
-```
-
-</div>
-
-## Conference organization
-I was the lead organizer of the 2020 [Cascadia R Conference](https://cascadiarconf.org), which included planned keynotes on open science and  machine learning, with presenters from academia (University of Washington) and industry, with machine learning engineers who use R in production with T-Mobile. The conference also included planned workshops on data visualization, reproducible and dynamic report generation with R Markdown (lead by doctoral students from my courses), interactive web application development with [shiny](https://shiny.rstudio.com), and introductory machine learning. Conference presenters were from around the Pacific Northwest, and an emphasis on gender and ethnic representation was emphasized when considering prospective presenters. The conference was canceled due to COVID-19.
-
-<br class="pageBreak">
 
 ## Workshops delivered{.nohead .submitted}
 
