@@ -36,7 +36,7 @@ courses <- readxl::read_xlsx(here::here("data", "courses.xlsx"))
 
 
 ```{r}
-PDF <- TRUE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
+PDF <- FALSE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
 if(PDF) {
   header <- '
   View online
@@ -47,7 +47,7 @@ if(PDF) {
 } else {
   header <- '
   Download PDF
-  <a href="https://github.com/datalorax/anderson-cv/raw/master/anderson-cv.pdf" class="icon-block">
+  <a href="https://github.com/spark-brc/spark-brc.github.io/raw/master/spark-cv/spark-cv.pdf" class="icon-block">
       <i class="fas fafooter fa-download"></i>
   </a>
   '
@@ -61,24 +61,24 @@ if(PDF) {
 cat(header)
 ```
 <div class = "footer",>
-  <a href="https://github.com/datalorax/" class="icon-block">
+  <a href="https://github.com/spark-brc" class="icon-block">
       <i class="fab fafooter fa-github"> | </i>
   </a>
   
-  <a href="mailto:daniela@uoregon.edu" class="icon-block">
+  <a href="mailto:seonggyu.park@brc.tamus.edu" class="icon-block">
       <i class="fas fafooter fa-envelope"> | </i>
   </a>
   
-  <a href="https://www.datalorax.com" class="icon-block">
+  <a href="https://blackland.tamu.edu/people/park-seonggyu/" class="icon-block">
       <i class="fas fafooter fa-globe"> | </i>
   </a>
   
-  <a href="(https://twitter.com/datalorax_" class="icon-block">
+  <a href="https://twitter.com/spark_brc" class="icon-block">
       <i class="fab fafooter fa-twitter"> | </i>
   </a>
   
-  <a href="(https://orcid.org/0000-0003-4699-4680" class="icon-block">
-      <i class="fab fafooter fa-orcid"></i>
+  <a href="https://scholar.google.com/citations?user=5Ob9lioAAAAJ&hl=en" class="icon-block">
+      <i class="ai fafooter ai-google-scholar ai-lg"></i>
   </a>
   
 </div>
@@ -285,7 +285,7 @@ research %>%
   select(point, what) %>% 
   kable()
 ```
-
+<br class="pageBreak"/>
 
 ## Web applications {.nohead .tch}
 ```{r}
@@ -347,7 +347,7 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
     volume <- paste0(gsub(",", "", volume), " (", issue,"),")
   }
   if(!is.null(doi) & !is.null(url)) {
-    doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
+    doi <- paste0('[<i class="ai location ai-doi ai-lg"></i>',doi,'](',url, ')')
     # doi <- paste0('[<i class="ai ai-doi ai-lg"></i>',doi,'](',url, ')')
   }
 

@@ -72,6 +72,10 @@ h2.date {
     padding-right: 2px;
   }
 
+.location:hover {
+color: #FF95FD;
+  }
+
 .fafooter:hover {
   color: #FF95FD;
 }
