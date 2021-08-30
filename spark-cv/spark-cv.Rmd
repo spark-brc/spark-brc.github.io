@@ -36,7 +36,7 @@ courses <- readxl::read_xlsx(here::here("data", "courses.xlsx"))
 
 
 ```{r}
-PDF <- FALSE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
+PDF <- TRUE # Set to TRUE when rendering to PDF via pagedown::chrome_print()
 if(PDF) {
   header <- '
   View online
@@ -123,7 +123,7 @@ cv_entries %>%
     loc = ifelse(!is.na(loc),
                 paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
                 ""),
-    what = paste0(what, ", ", where, ", ", loc),
+    what = paste0(what, ". ", where, ", ", loc),
     what = gsub("NA", "", what),
     what = gsub(", $", "", what),
     what = ifelse(!is.na(url), 
