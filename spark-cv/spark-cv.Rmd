@@ -62,19 +62,19 @@ cat(header)
 ```
 <div class = "footer",>
   <a href="https://github.com/spark-brc" class="icon-block">
-      <i class="fab fafooter fa-github"> | </i>
+      <i class="fab fafooter fa-github"> &ensp; | </i>
   </a>
   
   <a href="mailto:seonggyu.park@brc.tamus.edu" class="icon-block">
-      <i class="fas fafooter fa-envelope"> | </i>
+      <i class="fas fafooter fa-envelope"> &ensp;| </i>
   </a>
   
   <a href="https://blackland.tamu.edu/people/park-seonggyu/" class="icon-block">
-      <i class="fas fafooter fa-globe"> | </i>
+      <i class="fas fafooter fa-globe"> &ensp;| </i>
   </a>
   
   <a href="https://twitter.com/spark_brc" class="icon-block">
-      <i class="fab fafooter fa-twitter"> | </i>
+      <i class="fab fafooter fa-twitter"> &ensp;| </i>
   </a>
   
   <a href="https://scholar.google.com/citations?user=5Ob9lioAAAAJ&hl=en" class="icon-block">
@@ -192,11 +192,11 @@ research %>%
                           tool,
                           "</span>"
                           ),
-                          ""),
+                          ""),         
           year = str_c(year_begin, 
                       " --- ", 
                       ifelse(is.na(year_end), "current", year_end)),
-          what = paste0(what, ". ", "(",  year, "). ", tool, 
+          what = paste0(what, ", ", "(",  year, "). ", tool, 
                           fa_git, fa_web, fa_youtube),
           what = gsub("NA, ", "", what),
           order = paste0(order, ".")
@@ -227,6 +227,13 @@ research %>%
                                 youtube, 
                                 '><i class="fab fa-youtube"></i></a>'),
                           ""),
+          product = ifelse(!is.na(product),
+                        paste0(
+                          "<span class='pbackground'>",
+                          product,
+                          "</span>"
+                          ),
+                          ""), 
           tool = ifelse(!is.na(tool),
                         paste0(
                           "<span class='background'>",
@@ -234,10 +241,12 @@ research %>%
                           "</span>"
                           ),
                           ""),
-          year = str_c(year_begin, 
-                      " --- ", 
-                      ifelse(is.na(year_end), "current", year_end)),
-          what = paste0(what, ". ", "(",  year, "). ", tool, 
+          # year = str_c(year_begin, 
+          #             " --- ", 
+          #             ifelse(is.na(year_end), "current", year_end)),
+          year = str_c(
+                      ifelse(is.na(year_end), paste0(year_begin, "---", "current"), year_end)),
+          what = paste0(what, ", ", "(",  year, "). ", product, ", ", tool, 
                           fa_git, fa_web, fa_youtube),
           what = gsub("NA, ", "", what),
           order = paste0(order, ".")
@@ -267,6 +276,13 @@ research %>%
                                 youtube, 
                                 '><i class="fab falink fa-youtube"></i></a>'),
                           ""),
+          product = ifelse(!is.na(product),
+                        paste0(
+                          "<span class='pbackground'>",
+                          product,
+                          "</span>"
+                          ),
+                          ""), 
           tool = ifelse(!is.na(tool),
                         paste0(
                           "<span class='background'>",
@@ -274,18 +290,18 @@ research %>%
                           "</span>"
                           ),
                           ""),
-          year = str_c(year_begin, 
-                      " --- ", 
-                      ifelse(is.na(year_end), "current", year_end)),
-          what = paste0(what, ". ", "(",  year, "). ", tool, 
+          year = str_c(
+                      ifelse(is.na(year_end), paste0(year_begin, "---", "current"), year_end)),
+          what = paste0(what, ", ", "(",  year, "). ", product, ", ", tool, 
                           fa_git, fa_web, fa_youtube),
           what = gsub("NA, ", "", what),
           order = paste0(order, ".")
           ) %>% 
   select(point, what) %>% 
   kable()
+# <br class="pageBreak"/>
 ```
-<br class="pageBreak"/>
+
 
 ## Web applications {.nohead .tch}
 ```{r}
@@ -476,17 +492,17 @@ pubs_tbl <- pubs_tbl %>%
 <div class = "hangingindent prpa nohead">
 
 ```{r} 
-kable(pubs_tbl[1:7, ])
+kable(pubs_tbl[1:6, ])
 ```
 
 </div>
 
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
 
 <div class = "hangingindent prpa nohead">
 
 ```{r} 
-kable(pubs_tbl[8:nrow(pubs_tbl), ])
+kable(pubs_tbl[7:nrow(pubs_tbl), ])
 ```
 
 </div>
@@ -600,12 +616,18 @@ confs <- pubs %>%
 
 fa_doc <- ifelse(
   !is.na(confs$full_paper_link), 
-  paste0('[<i class="fas falink2 fa-file-alt"></i>](', 
+  paste0('[<i class="fas falink fa-file-alt"></i>](', 
          confs$full_paper_link, 
          ")"
          ),
   ""
   )
+
+fa_youtube = ifelse(!is.na(confs$youtube), 
+                paste0('<a href=', 
+                      confs$youtube, 
+                      '><i class="fab falink fa-youtube"></i></a>'),
+                "")
 
 fa_git <- ifelse(
   !is.na(confs$git_repo), 
@@ -618,7 +640,7 @@ fa_git <- ifelse(
 
 fa_pres <- ifelse(
   !is.na(confs$slides_link), 
-  paste0('[<i class="fas falink3 fa-chalkboard-teacher"></i>](', 
+  paste0('[<i class="fas falink fa-chalkboard-teacher"></i>](', 
          confs$slides_link, 
          ")"
          ),
@@ -636,7 +658,8 @@ conf_tbl <- tibble(year = confs$year,
                    cites = paste(unlist(formatted_cites), 
                                  fa_doc, 
                                  fa_pres, 
-                                 fa_git)
+                                 fa_git,
+                                 fa_youtube)
 )
   
 
