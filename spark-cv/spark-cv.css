@@ -65,6 +65,10 @@ h2.date {
     padding-left:2px;    
 }
 
+.background:hover {
+  background-color: #FF95FD;
+}
+
 .pbackground {
     font-size: 0.9em;
     background-color:#a3c4da;
@@ -73,6 +77,11 @@ h2.date {
     padding-right:2px;
     padding-left:2px;    
 }
+
+.pbackground:hover {
+  background-color: #FF95FD;
+}
+
 
 .location {
     color: #a3c4da;
@@ -291,6 +300,8 @@ h2.box {
   padding-left: 20px;
   margin: 10px;
   margin-left: -10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 .info-box thead {
   display: none;
