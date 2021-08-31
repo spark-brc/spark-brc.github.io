@@ -949,9 +949,9 @@ research %>%
                           ""),
           tool = ifelse(!is.na(tool),
                         paste0(
-                          "<span class='background'>",
+                          "<i class='background'>",
                           tool,
-                          "</span>"
+                          "</i>"
                           ),
                           ""),
           year = str_c(year_begin, 
