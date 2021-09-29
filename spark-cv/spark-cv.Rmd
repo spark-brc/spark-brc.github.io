@@ -506,6 +506,7 @@ kable(pubs_tbl[7:nrow(pubs_tbl), ])
 ```
 
 </div>
+<br>
 
 ## Manuscripts under review for publication {.submitted .nohead}
 
@@ -549,6 +550,7 @@ if(length(formatted_cites) > 0) {
 ```
 
 </div>
+<br class="pageBreak"/>
 
 ## Training Manuals {.submitted .nohead}
 
