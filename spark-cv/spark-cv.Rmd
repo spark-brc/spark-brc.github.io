@@ -497,7 +497,7 @@ kable(pubs_tbl[1:6, ])
 
 </div>
 
-<!-- <br class="pageBreak"/> -->
+<br class="pageBreak"/>
 
 <div class = "hangingindent prpa nohead">
 
@@ -506,6 +506,7 @@ kable(pubs_tbl[7:nrow(pubs_tbl), ])
 ```
 
 </div>
+
 <br>
 
 ## Manuscripts under review for publication {.submitted .nohead}
@@ -657,12 +658,6 @@ if(length(formatted_cites) > 0) {
 
 </div>
 
-
-
-
-
-<br class="pageBreak"/>
-
 ## National & International Conference Presentations {.prpa .nohead}
 
 <div class = "hangingindent">
@@ -729,17 +724,27 @@ conf_tbl <- conf_tbl %>%
   mutate(year = ifelse(count_within_year == 1, year, "")) %>% 
   select(-count_within_year)
 
-kable(conf_tbl[1:10, ])
+kable(conf_tbl[1:4, ])
 ```
 
 </div>
 
 <br class="pageBreak">
 
+
 <div class = "hangingindent prpa nohead">
 
 ```{r}
-kable(conf_tbl[11:19, ])
+kable(conf_tbl[5:15, ])
+```
+
+</div>
+
+<br class="pageBreak">
+<div class = "hangingindent prpa nohead">
+
+```{r}
+kable(conf_tbl[16:nrow(conf_tbl), ])
 ```
 
 </div>
