@@ -507,7 +507,6 @@ kable(pubs_tbl[7:nrow(pubs_tbl), ])
 
 </div>
 
-<br>
 
 ## Manuscripts under review for publication {.submitted .nohead}
 
