@@ -115,8 +115,12 @@ if(PDF) {
 
 
 <div id = "sub", class = "sub">
-Curriculum Vita
+<div id = "block_container">
+<div class = "sub_first", id="bloc1">Curriculum</div>
+<div class = "sub_last", id="bloc2">Vita</div>
 </div>
+</div>
+
 
 
 

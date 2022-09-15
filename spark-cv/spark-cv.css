@@ -204,6 +204,7 @@ p, li {
   font-size: 32pt;
   line-height: 110%;
 }
+
 /* 
 #block_containter2 {
     text-align:center;
@@ -227,7 +228,19 @@ p, li {
     line-height: 110%;
     padding-bottom: 100px;
   }
+  
+.sub_first {
+  color: gray;
+  text-align: left;
+  font-size: 1.2em;
 
+}
+.sub_last {
+  font-family: 'Roboto Slab', serif;
+  text-align: left;
+  font-weight: 500;
+  font-size: 1.2em;
+}
 
 .position {
   text-align: center;
@@ -239,13 +252,11 @@ p, li {
   background-color: #DEF2FF;
   padding-top: 10px;
   margin-top: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
   margin-bottom: 15px;
-  text-align: center;
-  font-weight: normal;
-  font-size: 1.2em;
+  padding-left: 83px;
+  text-align: left;
 }
-
 .extratrain td {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -513,7 +524,7 @@ td {
   justify-content: flex-end;
 }
 .item2 {
-  margin-right: 24px;
+  margin-right: 27px;
   display: flex;
   grid-area: b;
   /*border: solid 1px red;*/
@@ -529,10 +540,14 @@ td {
   /*display: table-cell;
   vertical-align: middle;*/
   color: #8C9196;
-  margin-top: -30px;
+  margin-top: -15px;
   float: right;
   color: gray;
 }
 .top_aligned_image:hover {
   color: #FF95FD;
 }
+
+
+
+
