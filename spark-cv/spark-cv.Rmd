@@ -567,7 +567,60 @@ if(length(formatted_cites) > 0) {
 ```
 
 </div>
-<!-- <br class="pageBreak"/> -->
+
+## Technical Reports {.submitted .nohead}
+
+<div class = "hangingindent">
+
+```{r }
+submitted <- pubs %>% 
+  filter(type == "technical_report") %>% 
+  select(-type)
+
+fa_web = ifelse(
+  !is.na(submitted$url), 
+  paste0(
+    '[<i class="fas falink fa-globe"></i>](',
+    submitted$url,
+    ")"),
+    "")
+
+# falink makes gray
+fa_doc <- ifelse(
+  !is.na(submitted$full_paper_link), 
+  paste0('[<i class="fas falink fa-file-alt"></i>](', 
+         submitted$full_paper_link, 
+         ")"
+         ),
+  ""
+  )
+
+fa_git <- ifelse(
+  !is.na(submitted$git_repo), 
+  paste0('[<i class="fab falink fa-github"></i>](', 
+         submitted$git_repo, 
+         ")"
+         ),
+  ""
+  )
+
+each_cite <- split(submitted, seq_len(nrow(submitted)))
+empties <- map(each_cite, ~map_lgl(.x, is.na))
+
+cites <- map2(each_cite, empties, ~.x[ ,!.y])
+formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
+
+if(length(formatted_cites) > 0) {
+ submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
+                         cites = paste(unlist(formatted_cites), fa_web, fa_doc, fa_git)) 
+  
+  kable(submitted_tbl) 
+}
+```
+
+</div>
+
+
 
 ## Training Manuals {.submitted .nohead}
 
@@ -622,57 +675,7 @@ if(length(formatted_cites) > 0) {
 </div>
 
 
-## Technical Reports {.submitted .nohead}
 
-<div class = "hangingindent">
-
-```{r }
-submitted <- pubs %>% 
-  filter(type == "technical_report") %>% 
-  select(-type)
-
-fa_web = ifelse(
-  !is.na(submitted$url), 
-  paste0(
-    '[<i class="fas falink fa-globe"></i>](',
-    submitted$url,
-    ")"),
-    "")
-
-# falink makes gray
-fa_doc <- ifelse(
-  !is.na(submitted$full_paper_link), 
-  paste0('[<i class="fas falink fa-file-alt"></i>](', 
-         submitted$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
-
-fa_git <- ifelse(
-  !is.na(submitted$git_repo), 
-  paste0('[<i class="fab falink fa-github"></i>](', 
-         submitted$git_repo, 
-         ")"
-         ),
-  ""
-  )
-
-each_cite <- split(submitted, seq_len(nrow(submitted)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
-
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
-
-if(length(formatted_cites) > 0) {
- submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                         cites = paste(unlist(formatted_cites), fa_web, fa_doc, fa_git)) 
-  
-  kable(submitted_tbl) 
-}
-```
-
-</div>
 <br class="pageBreak"/>
 
 ## National & International Conference Presentations {.prpa .nohead}
@@ -741,30 +744,30 @@ conf_tbl <- conf_tbl %>%
   mutate(year = ifelse(count_within_year == 1, year, "")) %>% 
   select(-count_within_year)
 
-kable(conf_tbl[1:nrow(conf_tbl), ])
+kable(conf_tbl[1:10, ])
 ```
 
 </div>
 
-<!-- <br class="pageBreak"> -->
+<br class="pageBreak">
 
 
-<!-- <div class = "hangingindent prpa nohead"> -->
+<div class = "hangingindent prpa nohead">
 
-<!-- ```{r} -->
-<!-- kable(conf_tbl[5:15, ]) -->
-<!-- ``` -->
+```{r}
+kable(conf_tbl[11:21, ])
+```
 
-<!-- </div> -->
+</div>
 
-<!-- <br class="pageBreak"> -->
-<!-- <div class = "hangingindent prpa nohead"> -->
+<br class="pageBreak">
+<div class = "hangingindent prpa nohead">
 
-<!-- ```{r} -->
-<!-- kable(conf_tbl[16:nrow(conf_tbl), ]) -->
-<!-- ``` -->
+```{r}
+kable(conf_tbl[22:nrow(conf_tbl), ])
+```
 
-<!-- </div> -->
+</div>
 <!-- <br class="pageBreak"> -->
 
 
