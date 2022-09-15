@@ -55,11 +55,6 @@ if(PDF) {
 
 ```
 
-
-<div class = "download">
-```{r results = "asis"}
-cat(header)
-```
 <div class = "footer",>
   <a href="https://github.com/spark-brc" class="icon-block">
       <i class="fab fafooter fa-github"> &ensp; | </i>
@@ -84,25 +79,47 @@ cat(header)
 </div>
 
 
+<div class="wrapper">
 
-</div>
-
+<div class="item1">
 <div id = "block_container">
-
-<div class = "first", id="bloc1">Seonggyu</div>  
+<div class = "first", id="bloc1">Seonggyu</div>
 <div class = "last", id="bloc2">Park</div>
-
+</div>
 </div>
 
+<div class="item2">
 <div id = "block_container">
-<div class = "first2", id="bloc1">Assistant Research</div>  
+<div class = "first2", id="bloc1">Assistant Research</div>
 <div class = "last2", id="bloc2">Scientist</div>
 </div>
+</div>
+<!-- Online -->
+<div class="item3">
+<a href="https://github.com/spark-brc/spark-brc.github.io/raw/master/spark-cv/spark-cv.pdf" class="icon-block">
+<img class="top_aligned_image" src="cv_pdf.svg" width="130">
+</a>
+</div>
+
+<!-- PDF -->
+<!-- <div class="item3"> -->
+<!-- <a href="https://spark-brc.github.io/spark-cv/" class="icon-block"> -->
+<!-- <img class="top_aligned_image" src="cv_online.svg" width="130"> -->
+<!-- </a> -->
+<!-- </div> -->
+
+
+</div>
+
+
 
 
 <div id = "sub", class = "sub">
 Curriculum Vita
 </div>
+
+
+
 
 
 <div class="grid-container">
@@ -134,10 +151,8 @@ cv_entries %>%
   select(year, what) %>% 
   kable()
 ```
-<br>
 
 ## Brief professional history {.history .nohead}
-
 ```{r}
 cv_entries %>% 
   filter(type == 'history') %>% 
@@ -507,6 +522,8 @@ kable(pubs_tbl[7:nrow(pubs_tbl), ])
 
 </div>
 
+<br class="pageBreak"/>
+
 
 ## Manuscripts under review for publication {.submitted .nohead}
 
@@ -656,6 +673,7 @@ if(length(formatted_cites) > 0) {
 ```
 
 </div>
+<br class="pageBreak"/>
 
 ## National & International Conference Presentations {.prpa .nohead}
 
@@ -723,31 +741,31 @@ conf_tbl <- conf_tbl %>%
   mutate(year = ifelse(count_within_year == 1, year, "")) %>% 
   select(-count_within_year)
 
-kable(conf_tbl[1:4, ])
+kable(conf_tbl[1:nrow(conf_tbl), ])
 ```
 
 </div>
 
-<br class="pageBreak">
+<!-- <br class="pageBreak"> -->
 
 
-<div class = "hangingindent prpa nohead">
+<!-- <div class = "hangingindent prpa nohead"> -->
 
-```{r}
-kable(conf_tbl[5:15, ])
-```
+<!-- ```{r} -->
+<!-- kable(conf_tbl[5:15, ]) -->
+<!-- ``` -->
 
-</div>
+<!-- </div> -->
 
-<br class="pageBreak">
-<div class = "hangingindent prpa nohead">
+<!-- <br class="pageBreak"> -->
+<!-- <div class = "hangingindent prpa nohead"> -->
 
-```{r}
-kable(conf_tbl[16:nrow(conf_tbl), ])
-```
+<!-- ```{r} -->
+<!-- kable(conf_tbl[16:nrow(conf_tbl), ]) -->
+<!-- ``` -->
 
-</div>
-<br class="pageBreak">
+<!-- </div> -->
+<!-- <br class="pageBreak"> -->
 
 
 # Funding Activity
@@ -849,6 +867,7 @@ grants %>%
 
 </div>
 
+<br class="pageBreak"/>
 
 <!-- ## Completed projects {.nohead .submitted} -->
 
@@ -945,7 +964,34 @@ talks %>%
 ```
 </div>
 
-<br class="pageBreak">
+
+
+## Journal issues edited {.history .nohead}
+<!-- <div class = "hangingindent"> -->
+
+```{r}
+cv_entries %>% 
+  filter(type == 'editor') %>% 
+  mutate(
+    loc = ifelse(!is.na(loc),
+                paste0("<i class='fas location fa-map-marker-alt'></i>", loc),
+                ""),    
+    what = paste0("<span style= 'font-weight: 500'>",
+                       what, 
+                       "</span>"),
+    what = paste0(what, ", ", where, ", ", loc),
+         what = gsub("NA", "", what),
+         what = gsub(", $", "", what)) %>% 
+  mutate(year = str_c(year_begin, 
+                      " --- ", 
+                      ifelse(is.na(year_end), "", year_end))) %>% 
+  select(year, what) %>% 
+  kable()
+
+```
+<!-- </div> -->
+
+<br class="pageBreak"/>
 
 # Fellowships & Awards {.submitted .nohead}
 
@@ -964,11 +1010,10 @@ cv_entries %>%
 ```
 </div>
 
-<br>
 
-# Professional Affiliations {.nohead .submitted}
+# Professional Affiliations {.submitted .nohead}
 
-<div class="hangingindent">
+<div class="hangingindent prof">
 
 ```{r}
 cv_entries %>%
@@ -978,7 +1023,6 @@ cv_entries %>%
   kable()
 ```
 </div>
-
 
 
 # Teaching
