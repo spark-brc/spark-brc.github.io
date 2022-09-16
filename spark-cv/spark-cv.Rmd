@@ -265,7 +265,7 @@ research %>%
           #             ifelse(is.na(year_end), "current", year_end)),
           year = str_c(
                       ifelse(is.na(year_end), paste0(year_begin, "---", "current"), year_end)),
-          what = paste0(what, ", ", "(",  year, "). ", product, ", ", tool, 
+          what = paste0(what, ", ", "(",  year, "). ", product, " ", tool, 
                           fa_git, fa_web, fa_youtube),
           what = gsub("NA, ", "", what),
           order = paste0(order, ".")
@@ -311,7 +311,7 @@ research %>%
                           ""),
           year = str_c(
                       ifelse(is.na(year_end), paste0(year_begin, "---", "current"), year_end)),
-          what = paste0(what, ", ", "(",  year, "). ", product, ", ", tool, 
+          what = paste0(what, ", ", "(",  year, "). ", product, " ", tool, 
                           fa_git, fa_web, fa_youtube),
           what = gsub("NA, ", "", what),
           order = paste0(order, ".")
