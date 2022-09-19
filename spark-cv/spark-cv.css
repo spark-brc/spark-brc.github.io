@@ -196,6 +196,7 @@ p, li {
 
 .first {
   color: gray;
+  margin-left:5pt;
   text-align: left;
   font-size: 32pt;
   line-height: 110%;
@@ -216,11 +217,12 @@ p, li {
 } */
 
 .first2 {
+    margin-left:10pt;
     color: gray;
     text-align: center;
     font-size: 12pt;
     line-height: 110%;
-    padding-bottom: 100px;
+    margin-bottom:50pt;
   }
 .last2 {
     color: rgb(51, 51, 51);
@@ -228,20 +230,20 @@ p, li {
     font-weight: 500;
     font-size: 12pt;
     line-height: 110%;
-    padding-bottom: 100px;
+    margin-bottom:50pt;
   }
   
 .sub_first {
   color: gray;
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1.5em;
 
 }
 .sub_last {
   font-family: 'Roboto Slab', serif;
   text-align: left;
   font-weight: 500;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 .position {
@@ -251,12 +253,12 @@ p, li {
 .sub {
   font-family: 'Roboto Slab', serif;
   color: #454545;
-  background-color: #DEF2FF;
+  /*background-color: #DEF2FF;*/
   padding-top: 10px;
-  margin-top: 15px;
+  margin-top: -5px;
   padding-bottom: 5px;
   margin-bottom: 15px;
-  padding-left: 83px;
+  padding-left: 10px;
   text-align: left;
 }
 .extratrain td {
@@ -510,39 +512,43 @@ td {
 
 .wrapper {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 4fr 1fr;
   grid-template-rows: 0.5fr 0.05fr;
   grid-template-areas:
     "a c"
     "b c";
-  /*border: solid 1px red;*/
+
 }
 .item1 {
-  margin-bottom: -5px;
+  margin-bottom: 0px;
   display: flex;
   grid-area: a;
-  /*border: solid 1px red;*/
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .item2 {
-  margin-right: 27px;
+  margin-right: -20px;
+  margin-bottom: 5px;
   display: flex;
   grid-area: b;
   /*border: solid 1px red;*/
   align-items: flex-start;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  padding-bottom: 5px;
+  border-bottom: 1.5px solid #c3e3f7;
 }
 .item3 {
   grid-area: c;
+  margin-top: -13px;
+
+  justify-content: flex-end;
   /*border: solid 1px red;*/
 }
 
 .top_aligned_image {
   /*display: table-cell;
   vertical-align: middle;*/
-  color: #8C9196;
-  margin-top: -15px;
+  color: #9ff5a1
   float: right;
   color: gray;
 }
@@ -551,5 +557,21 @@ td {
 }
 
 
-
+div.item3 {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    padding-left: 40px;
+    width: 140px;
+    color: #9ff5a1
+}
+img {
+    width: 100px;
+}
+.caption {
+    display: block;
+    margin-top: -10px;
+    padding-left: 7px;
+    font-size: 0.7em;
+}
 

@@ -94,24 +94,25 @@ if(PDF) {
 <div class = "last2", id="bloc2">Scientist</div>
 </div>
 </div>
+
 <!-- Online -->
 <div class="item3">
 <a href="https://github.com/spark-brc/spark-brc.github.io/raw/master/spark-cv/spark-cv.pdf" class="icon-block">
-<img class="top_aligned_image" src="cv_pdf.svg" width="130">
+<img class="top_aligned_image" src="cv_pdf.svg">
+<span class="caption">DOWNLOAD PDF</span>
 </a>
 </div>
 
 <!-- PDF -->
 <!-- <div class="item3"> -->
 <!-- <a href="https://spark-brc.github.io/spark-cv/" class="icon-block"> -->
-<!-- <img class="top_aligned_image" src="cv_online.svg" width="130"> -->
+<!-- <img class="top_aligned_image" src="cv_online.svg"> -->
+<!-- <span class="caption">VIEW ONLINE</span> -->
 <!-- </a> -->
 <!-- </div> -->
 
 
 </div>
-
-
 
 
 <div id = "sub", class = "sub">
