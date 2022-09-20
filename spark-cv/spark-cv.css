@@ -12,11 +12,17 @@
   @bottom-left {
     content: element(date);
   }
-}
-@page:first {
   @top-right {
     content: element(download);
   }
+}
+@page:first {
+  @top-right {
+    content: none;
+  }
+  /*@top-right {
+    content: element(download);
+  }*/
   @bottom-center {
     content: none;
   }
@@ -261,6 +267,22 @@ p, li {
   padding-left: 10px;
   text-align: left;
 }
+
+.toc {
+  font-family: 'Roboto Slab', serif;
+  border-top: 1px solid #cfcfcf;
+  color: gray;
+  /*background-color: #DEF2FF;*/
+  padding-top: 20px;
+  margin-top: 50px;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  font-size: 1.5em;
+  text-align: left;
+  margin-right: 120px;
+}
+
 .extratrain td {
   padding-top: 3px;
   padding-bottom: 3px;
@@ -539,7 +561,7 @@ td {
 }
 .item3 {
   grid-area: c;
-  margin-top: -13px;
+  margin-top: -10px;
 
   justify-content: flex-end;
   /*border: solid 1px red;*/
@@ -574,4 +596,9 @@ img {
     padding-left: 7px;
     font-size: 0.7em;
 }
-
+.icon-block2 i{
+      -webkit-text-stroke: 1px white;
+}
+.tlist {
+    margin-bottom: 10px;
+}

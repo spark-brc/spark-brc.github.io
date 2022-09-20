@@ -39,21 +39,30 @@ courses <- readxl::read_xlsx(here::here("data", "courses.xlsx"))
 PDF <- FALSE # Set to TRUE when rendering to PDF via pagedown::chrome_print('spark-cv.Rmd', 'spark-cv.pdf')
 if(PDF) {
   header <- '
-  View online
-  <a href="https://spark-brc.github.io/spark-cv/" class="icon-block">
-      <i class="fas fafooter fa-globe"></i>
+  <a href="#toc" class="icon-block2">
+      <i class="fas fafooter fa-chevron-up"></i>
   </a>
   '
 } else {
   header <- '
-  Download PDF
-  <a href="https://github.com/spark-brc/spark-brc.github.io/raw/master/spark-cv/spark-cv.pdf" class="icon-block">
-      <i class="fas fafooter fa-download"></i>
+  <a href="#toc" class="icon-block2">
+      <i class="fas fafooter fa-chevron-up"></i>
   </a>
   '
 }
 
 ```
+
+
+
+<div class = "download">
+```{r results = "asis"}
+cat(header)
+```
+
+</div>
+
+
 
 <div class = "footer",>
   <a href="https://github.com/spark-brc" class="icon-block">
@@ -124,9 +133,6 @@ if(PDF) {
 
 
 
-
-
-
 <div class="grid-container">
 
 ```{r summary, child = here::here("content", "summary.Rmd")}
@@ -136,6 +142,36 @@ if(PDF) {
 ```
 
 </div>
+<br>
+
+
+<div id = "toc", class = "toc">Table of Contents
+</div>
+
+<div class="tlist">
+- [Education]
+- [Brief professional history]
+- [Research Experience]
+  - [Model Applications]
+  - [Model Development]
+  - [Software Development]
+  - [Web applications]
+  - [Peer-Reviewed Publications]
+  - [Technical Reports]
+  - [Training Manuals]
+  - [National & International Conference Presentations]
+- [Funding Activity]
+- [Professional Service]
+  - [Workshops delivered]
+  - [Invited talks]
+  - [Journal issues edited]
+- [Fellowships & Awards]
+- [Professional Affiliations]
+- [Teaching]
+</div>
+
+
+<br class="pageBreak"/>
 
 ## Education {.education .nohead}
 ```{r}
@@ -156,6 +192,9 @@ cv_entries %>%
   select(year, what) %>% 
   kable()
 ```
+
+<br>
+<br>
 
 ## Brief professional history {.history .nohead}
 ```{r}
