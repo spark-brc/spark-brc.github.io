@@ -23,6 +23,7 @@ options(knitr.kable.NA = '')
 #### cv entries #####
 cv_entries <- readxl::read_xlsx(here::here("data", "cv_entries.xlsx"))
 research <- readxl::read_xlsx(here::here("data", "research.xlsx"))
+cv2 <- readr::read_csv(here::here("data", "entries.csv"), skip=1)
 
 #### publications #####
 pubs <- readxl::read_xlsx(here::here("data", "pubs.xlsx")) %>% 
@@ -193,8 +194,6 @@ cv_entries %>%
   kable()
 ```
 
-<br>
-<br>
 
 ## Brief professional history {.history .nohead}
 ```{r}
@@ -217,7 +216,9 @@ cv_entries %>%
   kable()
 
 ```
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
+
+<br>
 
 # Research Experience
 <div class = "inote">
@@ -228,7 +229,7 @@ Icons link to additional content
 
 ```{r}
 research %>% 
-  filter(type == "mp") %>% 
+  filter(type == "ma") %>% 
   arrange(order) %>% 
   mutate(fa_web = ifelse(!is.na(website), 
                           paste0( '<a href=', 
@@ -401,7 +402,8 @@ research %>%
   select(point, what) %>% 
   kable()
 ```
-<br>
+<!-- <br> -->
+<br class="pageBreak"/>
 
 ## Peer-Reviewed Publications
 
@@ -551,7 +553,7 @@ pubs_tbl <- pubs_tbl %>%
 <div class = "hangingindent prpa nohead">
 
 ```{r} 
-kable(pubs_tbl[1:6, ])
+kable(pubs_tbl[1:9, ])
 ```
 
 </div>
@@ -561,56 +563,57 @@ kable(pubs_tbl[1:6, ])
 <div class = "hangingindent prpa nohead">
 
 ```{r} 
-kable(pubs_tbl[7:nrow(pubs_tbl), ])
+kable(pubs_tbl[10:nrow(pubs_tbl), ])
 ```
 
-</div>
+<!-- </div> -->
 
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
 
 
-## Manuscripts under review for publication {.submitted .nohead}
+<!-- ## Manuscripts under review for publication {.submitted .nohead} -->
 
-<div class = "hangingindent">
+<!-- <div class = "hangingindent"> -->
 
-```{r }
-submitted <- pubs %>% 
-  filter(type == "in-review") %>% 
-  select(-type)
+<!-- ```{r } -->
+<!-- submitted <- pubs %>%  -->
+<!--   filter(type == "in-review") %>%  -->
+<!--   select(-type) -->
 
-fa_doc <- ifelse(
-  !is.na(submitted$full_paper_link), 
-  paste0('[<i class="fas falink2 fa-file-alt"></i>](', 
-         submitted$full_paper_link, 
-         ")"
-         ),
-  ""
-  )
+<!-- fa_doc <- ifelse( -->
+<!--   !is.na(submitted$full_paper_link),  -->
+<!--   paste0('[<i class="fas falink2 fa-file-alt"></i>](',  -->
+<!--          submitted$full_paper_link,  -->
+<!--          ")" -->
+<!--          ), -->
+<!--   "" -->
+<!--   ) -->
 
-fa_git <- ifelse(
-  !is.na(submitted$git_repo), 
-  paste0('[<i class="fab falink2 fa-github"></i>](', 
-         submitted$git_repo, 
-         ")"
-         ),
-  ""
-  )
+<!-- fa_git <- ifelse( -->
+<!--   !is.na(submitted$git_repo),  -->
+<!--   paste0('[<i class="fab falink2 fa-github"></i>](',  -->
+<!--          submitted$git_repo,  -->
+<!--          ")" -->
+<!--          ), -->
+<!--   "" -->
+<!--   ) -->
 
-each_cite <- split(submitted, seq_len(nrow(submitted)))
-empties <- map(each_cite, ~map_lgl(.x, is.na))
+<!-- each_cite <- split(submitted, seq_len(nrow(submitted))) -->
+<!-- empties <- map(each_cite, ~map_lgl(.x, is.na)) -->
 
-cites <- map2(each_cite, empties, ~.x[ ,!.y])
-formatted_cites <- map(cites, ~do.call(make_cite, .x)) 
+<!-- cites <- map2(each_cite, empties, ~.x[ ,!.y]) -->
+<!-- formatted_cites <- map(cites, ~do.call(make_cite, .x))  -->
 
-if(length(formatted_cites) > 0) {
- submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."),
-                         cites = paste(unlist(formatted_cites), fa_doc, fa_git)) 
-  
-  kable(submitted_tbl) 
-}
-```
+<!-- if(length(formatted_cites) > 0) { -->
+<!--  submitted_tbl <- tibble(count = paste0(seq(length(formatted_cites), 1), "."), -->
+<!--                          cites = paste(unlist(formatted_cites), fa_doc, fa_git))  -->
 
-</div>
+<!--   kable(submitted_tbl)  -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- </div> -->
+<br>
 
 ## Technical Reports {.submitted .nohead}
 
@@ -717,10 +720,8 @@ if(length(formatted_cites) > 0) {
 ```
 
 </div>
-
-
-
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
+<br>
 
 ## National & International Conference Presentations {.prpa .nohead}
 
@@ -788,7 +789,7 @@ conf_tbl <- conf_tbl %>%
   mutate(year = ifelse(count_within_year == 1, year, "")) %>% 
   select(-count_within_year)
 
-kable(conf_tbl[1:10, ])
+kable(conf_tbl[1:7, ])
 ```
 
 </div>
@@ -799,7 +800,7 @@ kable(conf_tbl[1:10, ])
 <div class = "hangingindent prpa nohead">
 
 ```{r}
-kable(conf_tbl[11:21, ])
+kable(conf_tbl[8:18, ])
 ```
 
 </div>
@@ -808,11 +809,11 @@ kable(conf_tbl[11:21, ])
 <div class = "hangingindent prpa nohead">
 
 ```{r}
-kable(conf_tbl[22:nrow(conf_tbl), ])
+kable(conf_tbl[19:nrow(conf_tbl), ])
 ```
 
 </div>
-<!-- <br class="pageBreak"> -->
+<br class="pageBreak">
 
 
 # Funding Activity
@@ -914,26 +915,26 @@ grants %>%
 
 </div>
 
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
 
-<!-- ## Completed projects {.nohead .submitted} -->
+## Completed projects {.nohead .submitted}
 
-<!-- <div class = "hangingindent"> -->
+<div class = "hangingindent">
 
-<!-- ```{r} -->
-<!-- grants %>% -->
-<!--   filter(type == "completed") %>% -->
-<!--   group_by(count = paste0(seq(1, nrow(.)), ".")) %>% -->
-<!--   nest() %>% -->
-<!--   mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>% -->
-<!--   select(-data) %>% -->
-<!--   unnest(cite) %>% -->
-<!--   kable() -->
-<!-- ``` -->
+```{r}
+grants %>%
+  filter(type == "completed") %>%
+  group_by(count = paste0(seq(1, nrow(.)), ".")) %>%
+  nest() %>%
+  mutate(cite  = map(data, ~do.call(make_grant_cite, .x))) %>%
+  select(-data) %>%
+  unnest(cite) %>%
+  kable()
+```
 
-<!-- </div> -->
+</div>
 
-<!-- <br class = "pageBreak"/> -->
+<br class = "pageBreak"/>
 
 <!-- ## Submitted (unfunded) {.nohead .submitted} -->
 
@@ -1038,7 +1039,7 @@ cv_entries %>%
 ```
 <!-- </div> -->
 
-<br class="pageBreak"/>
+<!-- <br class="pageBreak"/> -->
 
 # Fellowships & Awards {.submitted .nohead}
 
@@ -1117,3 +1118,15 @@ research %>%
   select(point, what) %>% 
   kable()
 ```
+
+<!-- {{#use_network_logo}} -->
+<!-- ```{r} -->
+<!-- # Build interactive network of positions colored by section -->
+<!-- # and connected if they occurred in the same year -->
+<!-- datadrivencv::build_network_logo(cv2) -->
+<!-- ``` -->
+<!-- {{/use_network_logo}} -->
+<!-- {{^use_network_logo}} -->
+<!-- <!-- Swap image with your preferred logo -->
+<!-- <!-- ![logo](https://cran.r-project.org/Rlogo.svg){width=100%} -->
+<!-- {{/use_network_logo}} -->
