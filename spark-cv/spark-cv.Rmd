@@ -614,6 +614,8 @@ kable(pubs_tbl[10:nrow(pubs_tbl), ])
 
 <!-- </div> -->
 <br>
+<br class="pageBreak">
+
 
 ## Technical Reports {.submitted .nohead}
 
@@ -668,7 +670,6 @@ if(length(formatted_cites) > 0) {
 </div>
 
 
-
 ## Training Manuals {.submitted .nohead}
 
 <div class = "hangingindent">
@@ -721,7 +722,7 @@ if(length(formatted_cites) > 0) {
 
 </div>
 <!-- <br class="pageBreak"/> -->
-<br>
+
 
 ## National & International Conference Presentations {.prpa .nohead}
 
@@ -789,31 +790,31 @@ conf_tbl <- conf_tbl %>%
   mutate(year = ifelse(count_within_year == 1, year, "")) %>% 
   select(-count_within_year)
 
-kable(conf_tbl[1:7, ])
+kable(conf_tbl[1:5, ])
 ```
 
 </div>
 
-<br class="pageBreak">
+<!-- <br class="pageBreak"> -->
 
 
 <div class = "hangingindent prpa nohead">
 
 ```{r}
-kable(conf_tbl[8:18, ])
+kable(conf_tbl[6:16, ])
 ```
 
 </div>
 
-<br class="pageBreak">
+<!-- <br class="pageBreak"> -->
 <div class = "hangingindent prpa nohead">
 
 ```{r}
-kable(conf_tbl[19:nrow(conf_tbl), ])
+kable(conf_tbl[17:nrow(conf_tbl), ])
 ```
 
 </div>
-<br class="pageBreak">
+<!-- <br class="pageBreak"> -->
 
 
 # Funding Activity
@@ -1011,7 +1012,7 @@ talks %>%
   kable()
 ```
 </div>
-
+<br class = "pageBreak"/>
 
 
 ## Journal issues edited {.history .nohead}
@@ -1040,6 +1041,7 @@ cv_entries %>%
 <!-- </div> -->
 
 <!-- <br class="pageBreak"/> -->
+<br>
 
 # Fellowships & Awards {.submitted .nohead}
 
