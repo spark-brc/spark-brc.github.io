@@ -10,10 +10,14 @@ links-to-footnotes: false
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
 library(lubridate)
 library(knitr)
 library(magrittr) # For the pipe 
+library(dplyr)
+library(purrr)
+library(stringr)
+library(readr)
+library(tidyr)
 
 source("cv_printing_functions.r")
 
@@ -1120,6 +1124,12 @@ research %>%
   select(point, what) %>% 
   kable()
 ```
+
+```{r}
+# viewer <- getOption("viewer") %||% utils::browseURL
+# viewer("spark-cv.html")
+```
+
 
 <!-- {{#use_network_logo}} -->
 <!-- ```{r} -->
