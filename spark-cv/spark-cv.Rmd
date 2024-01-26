@@ -146,7 +146,7 @@ make_cite <- function(authors,	year,	title,	journal = NULL,	volume = NULL,
 ```
 
 ```{r}
-PDF <- TRUE # Set to TRUE when rendering to PDF via pagedown::chrome_print('spark-cv.Rmd', 'spark-cv.pdf')
+PDF <- FALSE # Set to TRUE when rendering to PDF via pagedown::chrome_print('spark-cv.Rmd', 'spark-cv.pdf')
 if(PDF) {
   header <- '
   <a href="#toc" class="icon-block2">
@@ -223,12 +223,12 @@ cat(header)
 </div>
 
 <!-- PDF -->
-<!-- <div class="item3"> -->
-<!-- <a href="https://spark-brc.github.io/spark-cv/" class="icon-block"> -->
-<!-- <img class="top_aligned_image" src="cv_online.svg"> -->
-<!-- <span class="caption">VIEW ONLINE</span> -->
-<!-- </a> -->
-<!-- </div> -->
+<!-- <div class="item3">
+<a href="https://spark-brc.github.io/spark-cv/" class="icon-block">
+<img class="top_aligned_image" src="cv_online.svg">
+<span class="caption">VIEW ONLINE</span>
+</a>
+</div> -->
 
 
 </div>
@@ -377,6 +377,8 @@ ma_tbl <- ma_tbl %>%
 
 kable(ma_tbl)
 ```
+
+</div>
 
 ## Model Development {.submitted .nohead}
 
