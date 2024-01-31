@@ -223,13 +223,12 @@ cat(header)
 </div>
 
 <!-- PDF -->
-<!-- <div class="item3">
-<a href="https://spark-brc.github.io/spark-cv/" class="icon-block">
-<img class="top_aligned_image" src="cv_online.svg">
-<span class="caption">VIEW ONLINE</span>
-</a>
-</div> -->
-
+<!-- <div class="item3"> -->
+<!-- <a href="https://spark-brc.github.io/spark-cv/" class="icon-block"> -->
+<!-- <img class="top_aligned_image" src="cv_online.svg"> -->
+<!-- <span class="caption">VIEW ONLINE</span> -->
+<!-- </a> -->
+<!-- </div> -->
 
 </div>
 
